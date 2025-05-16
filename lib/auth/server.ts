@@ -16,5 +16,4 @@ export const auth = betterAuth({
       clientSecret: env.GITHUB_SECRET,
     },
   },
-  plugins: [],
 });
