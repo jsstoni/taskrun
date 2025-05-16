@@ -1,4 +1,5 @@
 import { Logo } from '@/components/logo';
+import { NavUser } from '@/components/nav-user';
 import {
   Sidebar,
   SidebarContent,
@@ -13,7 +14,9 @@ export function SidebarApp() {
         <Logo />
       </SidebarHeader>
       <SidebarContent></SidebarContent>
-      <SidebarFooter></SidebarFooter>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
     </Sidebar>
   );
 }
