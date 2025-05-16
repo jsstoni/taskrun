@@ -6,7 +6,7 @@ module.exports = {
   tabWidth: 2,
   useTabs: false,
   tailwindStylesheet: './app/globals.css',
-  tailwindFunctions: ['clsx'],
+  tailwindFunctions: ['clsx', 'cva'],
   plugins: [
     '@ianvs/prettier-plugin-sort-imports',
     'prettier-plugin-tailwindcss',
