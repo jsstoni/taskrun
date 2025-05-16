@@ -1,3 +1,5 @@
+import { SidebarApp } from '@/components/sidebar-app';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
@@ -15,5 +17,10 @@ export default async function Layout({
     redirect('/');
   }
 
-  return <>{children}</>;
+  return (
+    <SidebarProvider>
+      <SidebarApp />
+      <SidebarInset>{children}</SidebarInset>
+    </SidebarProvider>
+  );
 }
