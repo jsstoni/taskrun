@@ -3,6 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@utility container {
+  margin-inline: auto;
+  @media (width >= 768px) {
+    max-width: 768px;
+  }
+  @media (width >= 1024px) {
+    max-width: 1024px;
+  }
+  @media (width >= 1124px) {
+    max-width: 1124px;
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
