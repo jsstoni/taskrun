@@ -65,9 +65,9 @@ export function CreateJob() {
 
   return (
     <Dialog open={isOpen} onOpenChange={closeDialog}>
-      <div className="mt-2 px-2">
+      <div className="mt-4 px-4">
         <DialogTrigger asChild>
-          <Button className="w-full justify-start">
+          <Button className="w-full justify-start" size="sm" variant="outline">
             <Plus /> Create Schedule
           </Button>
         </DialogTrigger>
