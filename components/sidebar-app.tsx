@@ -1,3 +1,4 @@
+import { CreateJob } from '@/components/dashboard/create-job';
 import { Links } from '@/components/links';
 import { Logo } from '@/components/logo';
 import { NavUser } from '@/components/nav-user';
@@ -40,6 +41,7 @@ export function SidebarApp() {
         <Logo />
       </SidebarHeader>
       <SidebarContent>
+        <CreateJob />
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>

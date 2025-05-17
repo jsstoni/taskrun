@@ -1,3 +1,5 @@
+import { jobs } from '@/lib/schemas/job';
+import { relations } from 'drizzle-orm';
 import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -9,6 +11,10 @@ export const users = pgTable('users', {
   createdAt: timestamp('created_at').notNull(),
   updatedAt: timestamp('updated_at').notNull(),
 });
+
+export const usersRelations = relations(users, ({ many }) => ({
+  jobs: many(jobs),
+}));
 
 export const sessions = pgTable('sessions', {
   id: text('id').primaryKey(),
