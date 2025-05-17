@@ -1,6 +1,6 @@
 import { jobs } from '@/lib/schemas/job';
 import { relations } from 'drizzle-orm';
-import { boolean, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { boolean, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
   id: text('id').primaryKey(),
@@ -12,8 +12,12 @@ export const users = pgTable('users', {
   updatedAt: timestamp('updated_at').notNull(),
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(users, ({ many, one }) => ({
   jobs: many(jobs),
+  discord: one(discords, {
+    fields: [users.id],
+    references: [discords.userId],
+  }),
 }));
 
 export const sessions = pgTable('sessions', {
@@ -54,4 +58,13 @@ export const verifications = pgTable('verifications', {
   expiresAt: timestamp('expires_at').notNull(),
   createdAt: timestamp('created_at'),
   updatedAt: timestamp('updated_at'),
+});
+
+export const discords = pgTable('discords', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  webhook: text('webhook').notNull(),
+  userId: text('user_id')
+    .notNull()
+    .unique()
+    .references(() => users.id, { onDelete: 'cascade' }),
 });
