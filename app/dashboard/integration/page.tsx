@@ -3,10 +3,9 @@ import { Header } from '@/components/dashboard/header';
 export default function Integration() {
   return (
     <>
-      <Header>
-        <h1>Integration</h1>
-      </Header>
-      Integration
+      <Header menu={[{ title: 'Integration', url: '/integration' }]}></Header>
+
+      <section className="p-4">Integration</section>
     </>
   );
 }

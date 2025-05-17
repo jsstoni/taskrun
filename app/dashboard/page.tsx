@@ -5,9 +5,7 @@ import Link from 'next/link';
 export default function Dashboard() {
   return (
     <>
-      <Header>
-        <h1>Dashboard</h1>
-      </Header>
+      <Header />
 
       <section className="p-4">
         <h2 className="text-lg text-blue-400">Welcome to TaskRun!</h2>

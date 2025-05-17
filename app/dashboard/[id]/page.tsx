@@ -1,3 +1,5 @@
+import { Header } from '@/components/dashboard/header';
+
 export default async function JobId({
   params,
 }: {
@@ -5,5 +7,10 @@ export default async function JobId({
 }) {
   const { id } = await params;
 
-  return <section className="p-4">{id}</section>;
+  return (
+    <>
+      <Header menu={[{ title: id, url: `/${id}` }]} />
+      <section className="p-4">{id}</section>
+    </>
+  );
 }
