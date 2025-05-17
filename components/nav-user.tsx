@@ -15,19 +15,13 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import { signOut, useSession } from '@/lib/auth/client';
+import { $Infer, signOut } from '@/lib/auth/client';
 import { BadgeCheck, ChevronsUpDown, LogOut } from 'lucide-react';
 
-export function NavUser() {
+type User = typeof $Infer.Session.user;
+
+export function NavUser({ data }: { data: User }) {
   const { isMobile } = useSidebar();
-
-  const { data: session } = useSession();
-
-  if (!session) {
-    return null;
-  }
-
-  const { user } = session;
 
   return (
     <SidebarMenu>
@@ -39,12 +33,12 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.image ?? ''} alt={user.name} />
+                <AvatarImage src={data.image ?? ''} alt={data.name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-semibold">{data.name}</span>
+                <span className="truncate text-xs">{data.email}</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>

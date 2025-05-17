@@ -17,9 +17,11 @@ export default async function Layout({
     redirect('/');
   }
 
+  const { user } = session;
+
   return (
     <SidebarProvider>
-      <SidebarApp />
+      <SidebarApp user={user} />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );

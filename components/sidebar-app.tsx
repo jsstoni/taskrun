@@ -14,7 +14,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import { CalendarClock, Home, Puzzle } from 'lucide-react';
+import { $Infer } from '@/lib/auth/client';
+import { Home, Puzzle } from 'lucide-react';
 
 const items = [
   {
@@ -23,18 +24,15 @@ const items = [
     icon: Home,
   },
   {
-    title: 'Job Scheduler',
-    url: '/dashboard/jobs',
-    icon: CalendarClock,
-  },
-  {
     title: 'Integration',
     url: '/dashboard/integration',
     icon: Puzzle,
   },
 ];
 
-export function SidebarApp() {
+type User = typeof $Infer.Session.user;
+
+export function SidebarApp({ user }: { user: User }) {
   return (
     <Sidebar>
       <SidebarHeader>
@@ -61,7 +59,7 @@ export function SidebarApp() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <NavUser />
+        <NavUser data={user} />
       </SidebarFooter>
     </Sidebar>
   );
