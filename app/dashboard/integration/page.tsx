@@ -7,7 +7,7 @@ export default async function Integration() {
     <>
       <Header menu={[{ title: 'Integration', url: '/integration' }]}></Header>
 
-      <section className="p-4">
+      <section className="p-6">
         <h3 className="text-2xl">Integration</h3>
 
         <Tabs className="mt-4" defaultValue="discord">

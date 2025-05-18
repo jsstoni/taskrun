@@ -65,13 +65,15 @@ export function CreateJob() {
 
   return (
     <Dialog open={isOpen} onOpenChange={closeDialog}>
-      <div className="mt-4 px-4">
-        <DialogTrigger asChild>
-          <Button className="w-full justify-start" size="sm" variant="outline">
-            <Plus /> Create Schedule
-          </Button>
-        </DialogTrigger>
-      </div>
+      <DialogTrigger asChild>
+        <Button
+          className="mt-2 w-full justify-start"
+          size="sm"
+          variant="outline"
+        >
+          <Plus /> Create Schedule
+        </Button>
+      </DialogTrigger>
       <DialogContent className="min-w-lg">
         <DialogHeader>
           <DialogTitle>Create Scheduled</DialogTitle>

@@ -62,10 +62,10 @@ export async function SidebarApp({ user }: { user: User }) {
   return (
     <Sidebar>
       <SidebarHeader>
-        <Logo />
+        <Logo size="sm" />
+        <CreateJob />
       </SidebarHeader>
       <SidebarContent>
-        <CreateJob />
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>

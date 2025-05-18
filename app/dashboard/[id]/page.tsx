@@ -10,7 +10,7 @@ export default async function JobId({
   return (
     <>
       <Header menu={[{ title: id, url: `/${id}` }]} />
-      <section className="p-4">{id}</section>
+      <section className="p-6">{id}</section>
     </>
   );
 }

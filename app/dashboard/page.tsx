@@ -7,7 +7,7 @@ export default function Dashboard() {
     <>
       <Header />
 
-      <section className="p-4">
+      <section className="p-6">
         <h2 className="text-lg text-blue-400">Welcome to TaskRun!</h2>
 
         <div className="mt-4 grid gap-6 md:grid-cols-3">

@@ -1,13 +1,22 @@
-export function Logo() {
+import { cn } from '@/lib/utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+
+const variants = cva('inline-flex items-center gap-1', {
+  variants: {
+    size: {
+      default: 'text-3xl [&_svg]:size-9',
+      sm: 'text-lg [&_svg]:size-5',
+    },
+  },
+  defaultVariants: {
+    size: 'default',
+  },
+});
+
+export function Logo({ size }: VariantProps<typeof variants>) {
   return (
-    <div className="inline-flex items-center gap-1 text-2xl">
-      <svg
-        width="32"
-        height="32"
-        viewBox="0 0 250 250"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+    <div className={cn(variants({ size }))}>
+      <svg viewBox="0 0 250 250" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           opacity="0.961"
           d="M113.195 17.3611C163.263 15.4086 199.836 36.4733 222.917 80.5555C192.495 87.9504 162.403 87.0244 132.639 77.7778C124.549 73.9648 116.679 69.7982 109.028 65.2778C88.5627 57.5955 68.1924 58.0586 47.9168 66.6667C40.4197 70.2358 33.9384 75.0969 28.4724 81.25C28.0095 80.7871 27.5464 80.324 27.0835 79.8611C44.9456 43.9243 73.6493 23.091 113.195 17.3611Z"
