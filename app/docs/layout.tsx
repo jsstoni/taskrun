@@ -11,7 +11,7 @@ export default function DocsLayout({
 
   return (
     <div className="flex min-h-screen">
-      <aside className="w-64 border-r p-4">
+      <aside className="w-64 border-r bg-sidebar p-4">
         <Logo size="sm" />
         <Nav sections={sections} />
       </aside>
