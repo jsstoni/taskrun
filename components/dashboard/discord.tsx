@@ -11,6 +11,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { WrapperCard } from '@/components/wrapper-card';
 import { addDiscord } from '@/lib/actions/add-discord';
 import { DiscordValues, schemaDiscord } from '@/lib/validations/discord';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -37,9 +38,10 @@ export function Discord() {
   };
 
   return (
-    <div className="rounded-xl border p-4">
-      <p className="mb-4">Receive detailed alerts directly in Discord</p>
-
+    <WrapperCard
+      title="Discord"
+      description="Receive detailed alerts directly in Discord"
+    >
       <Form {...form}>
         <form
           className="flex flex-col gap-3"
@@ -93,6 +95,6 @@ export function Discord() {
           </Button>
         </form>
       </Form>
-    </div>
+    </WrapperCard>
   );
 }
