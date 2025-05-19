@@ -33,3 +33,7 @@ export const schemaJobs = z.object({
 });
 
 export type JobValues = z.infer<typeof schemaJobs>;
+
+export const idJob = z.object({
+  id: z.string().uuid('ID must be a valid UUID'),
+});
