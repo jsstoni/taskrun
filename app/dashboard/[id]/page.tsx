@@ -1,5 +1,6 @@
 import { Header } from '@/components/dashboard/header';
 import { RemoveJob } from '@/components/dashboard/remove-job';
+import { RunJob } from '@/components/dashboard/run-job';
 import { db } from '@/lib/db';
 import { CalendarSync } from 'lucide-react';
 import { notFound } from 'next/navigation';
@@ -33,6 +34,7 @@ export default async function JobId({
       <Header menu={[{ title: job.name, url: `/${id}` }]}>
         <div className="ml-auto flex items-center gap-2">
           <RemoveJob id={id} />
+          <RunJob id={id} />
         </div>
       </Header>
 

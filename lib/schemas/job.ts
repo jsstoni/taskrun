@@ -3,6 +3,7 @@ import { relations } from 'drizzle-orm';
 import {
   boolean,
   index,
+  pgEnum,
   pgTable,
   text,
   timestamp,
@@ -28,9 +29,35 @@ export const jobs = pgTable(
   (t) => [index('user_id').on(t.userId)]
 );
 
-export const jobsRelations = relations(jobs, ({ one }) => ({
+export const jobsRelations = relations(jobs, ({ one, many }) => ({
   user: one(users, {
     fields: [jobs.userId],
     references: [users.id],
+  }),
+  logs: many(logs),
+}));
+
+export const logStatusEnum = pgEnum('log_status', ['ok', 'failed']);
+
+export const logs = pgTable(
+  'logs',
+  {
+    id: uuid('id').defaultRandom().primaryKey(),
+    name: text('name').notNull(),
+    status: logStatusEnum('status').notNull(),
+    response: text('response').notNull(),
+    timeResponse: varchar('time_response').notNull(),
+    jobId: uuid('job_id')
+      .notNull()
+      .references(() => jobs.id, { onDelete: 'cascade' }),
+    createdAt: timestamp('created_at').notNull().defaultNow(),
+  },
+  (t) => [index('job_id').on(t.jobId)]
+);
+
+export const logsRelations = relations(logs, ({ one }) => ({
+  job: one(jobs, {
+    fields: [logs.jobId],
+    references: [jobs.id],
   }),
 }));
