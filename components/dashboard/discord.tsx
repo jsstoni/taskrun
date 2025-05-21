@@ -19,11 +19,11 @@ import { AlertCircle, Link, Loader2 } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 
-export function Discord() {
+export function Discord({ value }: { value: string | undefined }) {
   const form = useForm<DiscordValues>({
     resolver: zodResolver(schemaDiscord),
     defaultValues: {
-      webhook: '',
+      webhook: value || '',
     },
   });
 
