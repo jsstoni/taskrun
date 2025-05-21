@@ -2,11 +2,15 @@ import { Header } from '@/components/dashboard/header';
 import { RemoveJob } from '@/components/dashboard/remove-job';
 import { RunJob } from '@/components/dashboard/run-job';
 import { db } from '@/lib/db';
+import { cn } from '@/lib/utils';
 import { CalendarSync } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 async function jobById(id: string) {
   const result = await db.query.jobs.findFirst({
+    with: {
+      logs: true,
+    },
     where: (jobs, { eq }) => eq(jobs.id, id),
   });
 
@@ -52,6 +56,31 @@ export default async function JobId({
               {job.command}
             </p>
           </div>
+        </div>
+
+        <div className="mt-4 flex flex-col gap-4 border-t pt-4 text-muted-foreground">
+          {job.logs.map((log) => (
+            <div
+              className="flex flex-col items-start gap-2 md:flex-row"
+              key={log.id}
+            >
+              <p>{log.createdAt.toString()}</p>
+              <p>{log.name}</p>
+              <p>{log.response}</p>
+              <p
+                className={cn(
+                  'ml-auto rounded-lg p-1 px-3 text-xs text-foreground',
+                  {
+                    'bg-green-400/40': log.status === 'ok',
+                    'bg-red-400/40': log.status === 'failed',
+                  }
+                )}
+              >
+                {log.status}
+              </p>
+              <p>{log.timeResponse}ms</p>
+            </div>
+          ))}
         </div>
       </section>
     </>
