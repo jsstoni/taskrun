@@ -77,7 +77,7 @@ export default async function JobId({
             >
               <p>{format(log.createdAt, 'dd/MM/yyyy HH:mm')}</p>
               <p>{log.name}</p>
-              <p>{log.response}</p>
+              <p className="truncate md:w-[240px]">{log.response}</p>
               <p
                 className={cn(
                   'ml-auto rounded-lg p-1 px-3 text-xs text-foreground',
