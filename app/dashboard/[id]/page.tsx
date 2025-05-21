@@ -4,6 +4,7 @@ import { RunJob } from '@/components/dashboard/run-job';
 import { db } from '@/lib/db';
 import { logs } from '@/lib/schemas/job';
 import { cn } from '@/lib/utils';
+import cronstrue from 'cronstrue';
 import { format } from 'date-fns';
 import { desc } from 'drizzle-orm';
 import { CalendarSync } from 'lucide-react';
@@ -53,12 +54,17 @@ export default async function JobId({
             <CalendarSync size={28} />
           </div>
           <div>
-            <span className="block text-xl font-bold">{job.name}</span>
+            <p className="block text-xl font-bold">
+              {job.name}{' '}
+              <span className="ml-2 text-xs text-muted-foreground">
+                {job.command}
+              </span>
+            </p>
             <p className="text-sm text-muted-foreground">
               <small className="mr-2 rounded-lg border bg-muted p-1 py-0.5">
                 {job.scheduler}
               </small>
-              {job.command}
+              {cronstrue.toString(job.scheduler)}
             </p>
           </div>
         </div>
