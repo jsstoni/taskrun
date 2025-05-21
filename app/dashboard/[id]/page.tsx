@@ -3,6 +3,7 @@ import { RemoveJob } from '@/components/dashboard/remove-job';
 import { RunJob } from '@/components/dashboard/run-job';
 import { db } from '@/lib/db';
 import { cn } from '@/lib/utils';
+import { format } from 'date-fns';
 import { CalendarSync } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
@@ -64,7 +65,7 @@ export default async function JobId({
               className="flex flex-col items-start gap-2 md:flex-row"
               key={log.id}
             >
-              <p>{log.createdAt.toString()}</p>
+              <p>{format(log.createdAt, 'dd/MM/yyyy HH:mm')}</p>
               <p>{log.name}</p>
               <p>{log.response}</p>
               <p
