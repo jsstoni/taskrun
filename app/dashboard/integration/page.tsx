@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { auth } from '@/lib/auth/server';
 import { db } from '@/lib/db';
 import { headers } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 
 export default async function Integration() {
   const session = await auth.api.getSession({
@@ -12,7 +12,7 @@ export default async function Integration() {
   });
 
   if (!session) {
-    notFound();
+    redirect('/');
   }
 
   const discord = await db.query.discords.findFirst({

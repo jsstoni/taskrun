@@ -11,20 +11,24 @@ import { CalendarSync } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 async function jobById(id: string) {
-  const result = await db.query.jobs.findFirst({
-    with: {
-      logs: {
-        orderBy: [desc(logs.createdAt)],
+  try {
+    const result = await db.query.jobs.findFirst({
+      with: {
+        logs: {
+          orderBy: [desc(logs.createdAt)],
+        },
       },
-    },
-    where: (jobs, { eq }) => eq(jobs.id, id),
-  });
+      where: (jobs, { eq }) => eq(jobs.id, id),
+    });
 
-  if (!result) {
+    if (!result) {
+      return null;
+    }
+
+    return result;
+  } catch {
     return null;
   }
-
-  return result;
 }
 
 export default async function JobId({
