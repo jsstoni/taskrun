@@ -2,15 +2,19 @@ import { Header } from '@/components/dashboard/header';
 import { RemoveJob } from '@/components/dashboard/remove-job';
 import { RunJob } from '@/components/dashboard/run-job';
 import { db } from '@/lib/db';
+import { logs } from '@/lib/schemas/job';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
+import { desc } from 'drizzle-orm';
 import { CalendarSync } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 async function jobById(id: string) {
   const result = await db.query.jobs.findFirst({
     with: {
-      logs: true,
+      logs: {
+        orderBy: [desc(logs.createdAt)],
+      },
     },
     where: (jobs, { eq }) => eq(jobs.id, id),
   });
