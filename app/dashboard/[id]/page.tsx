@@ -45,12 +45,7 @@ export default async function JobId({
 
   return (
     <>
-      <Header menu={[{ title: job.name, url: `/${id}` }]}>
-        <div className="ml-auto flex items-center gap-2">
-          <RemoveJob id={id} />
-          <RunJob id={id} />
-        </div>
-      </Header>
+      <Header menu={[{ title: job.name, url: `/${id}` }]} />
 
       <section className="p-6">
         <div className="flex items-center gap-4">
@@ -71,12 +66,17 @@ export default async function JobId({
               {cronstrue.toString(job.scheduler)}
             </p>
           </div>
+
+          <div className="ml-auto flex items-center gap-2">
+            <RemoveJob id={id} />
+            <RunJob id={id} />
+          </div>
         </div>
 
-        <div className="mt-4 flex flex-col gap-4 border-t pt-4 text-muted-foreground">
+        <div className="mt-4 flex flex-col gap-4 border-t pt-4 text-sm text-muted-foreground">
           {job.logs.map((log) => (
             <div
-              className="flex flex-col items-start gap-2 md:flex-row"
+              className="flex flex-col items-start gap-2 border-b pb-2 md:flex-row"
               key={log.id}
             >
               <p>{format(log.createdAt, 'dd/MM/yyyy HH:mm')}</p>
