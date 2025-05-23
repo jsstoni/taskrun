@@ -1,8 +1,10 @@
 import { Discord } from '@/components/dashboard/discord';
 import { Header } from '@/components/dashboard/header';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { auth } from '@/lib/auth/server';
 import { db } from '@/lib/db';
+import { AlertCircle } from 'lucide-react';
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -34,6 +36,14 @@ export default async function Integration() {
             <Discord value={discord?.webhook} />
           </TabsContent>
         </Tabs>
+
+        <Alert className="mt-4" variant="destructive">
+          <AlertCircle className="size-4" />
+          <AlertTitle>Webhook Info</AlertTitle>
+          <AlertDescription>
+            Only one webhook allowed. Save a new one to replace it.
+          </AlertDescription>
+        </Alert>
       </section>
     </>
   );

@@ -1,6 +1,5 @@
 'use client';
 
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -15,7 +14,7 @@ import { WrapperCard } from '@/components/wrapper-card';
 import { addDiscord } from '@/lib/actions/add-discord';
 import { DiscordValues, schemaDiscord } from '@/lib/validations/discord';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { AlertCircle, Link, Loader2 } from 'lucide-react';
+import { Link, Loader2 } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { useForm } from 'react-hook-form';
 
@@ -74,14 +73,6 @@ export function Discord({ value }: { value: string | undefined }) {
           {form.formState.errors.root && (
             <p className="text-red-500">{form.formState.errors.root.message}</p>
           )}
-
-          <Alert variant="destructive">
-            <AlertCircle className="size-4" />
-            <AlertTitle>Webhook Info</AlertTitle>
-            <AlertDescription>
-              Only one webhook allowed. Save a new one to replace it.
-            </AlertDescription>
-          </Alert>
 
           <Button
             className="self-start"
