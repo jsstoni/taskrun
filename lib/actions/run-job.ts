@@ -6,6 +6,7 @@ import { sf } from '@/lib/fetch';
 import { jobs, logs } from '@/lib/schemas/job';
 import { idJob } from '@/lib/validations/job';
 import { eq, sql } from 'drizzle-orm';
+import { revalidatePath } from 'next/cache';
 
 export const runJob = actionClient
   .use(authMiddleware)
@@ -52,4 +53,6 @@ export const runJob = actionClient
     } catch (error: any) {
       console.log(error);
     }
+
+    revalidatePath(`/dashboard/${data.id}`);
   });
