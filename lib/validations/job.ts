@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
-const cronValueRegex = /^(\*|\d+|\d+-\d+|\d+(,\d+)*|\*\/\d+|\d+-\d+\/\d+)$/;
+const cronValueRegex =
+  /^(\*|\d+|\d+-\d+|\*\/\d+|\d+(,\d+)*|\d+-\d+\/\d+)(,\d+)*$/;
 
 export const schemaJobs = z.object({
   name: z.string().min(1, 'Name is required'),
@@ -26,9 +27,14 @@ export const schemaJobs = z.object({
       }
       return val;
     },
-    z.any().refine((val) => typeof val === 'object' && val !== null, {
-      message: 'MetaData must be valid JSON',
-    })
+    z
+      .any()
+      .refine(
+        (val) => typeof val === 'object' && val !== null && !Array.isArray(val),
+        {
+          message: 'Payload must be a valid JSON object',
+        }
+      )
   ),
 });
 

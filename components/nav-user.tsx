@@ -23,6 +23,10 @@ type User = typeof $Infer.Session.user;
 export function NavUser({ data }: { data: User }) {
   const { isMobile } = useSidebar();
 
+  const handleSignOut = async () => {
+    await signOut();
+  };
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -56,7 +60,7 @@ export function NavUser({ data }: { data: User }) {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={async () => await signOut()}>
+            <DropdownMenuItem onClick={handleSignOut}>
               <LogOut />
               Log out
             </DropdownMenuItem>

@@ -12,14 +12,12 @@ export function RunJob({ id }: { id: string }) {
     },
   });
 
+  const handleRun = async () => {
+    await executeAsync({ id });
+  };
+
   return (
-    <Button
-      size="sm"
-      disabled={isExecuting}
-      onClick={async () => {
-        await executeAsync({ id });
-      }}
-    >
+    <Button size="sm" disabled={isExecuting} onClick={handleRun}>
       <Play />
       {isExecuting && <Loader2 className="animate-spin" />} Run Job
     </Button>

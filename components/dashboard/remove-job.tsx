@@ -28,10 +28,14 @@ export function RemoveJob({ id }: { id: string }) {
     },
   });
 
+  const handleDelete = async () => {
+    await executeAsync({ id });
+  };
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="destructive">
+        <Button size="sm" variant="outline">
           <Trash /> Trash
         </Button>
       </AlertDialogTrigger>
@@ -45,11 +49,7 @@ export function RemoveJob({ id }: { id: string }) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <Button
-            onClick={async () => {
-              await executeAsync({ id });
-            }}
-          >
+          <Button onClick={handleDelete}>
             {isExecuting && <Loader2 className="animate-spin" />} Continue
           </Button>
         </AlertDialogFooter>
