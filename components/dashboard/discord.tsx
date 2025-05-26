@@ -1,14 +1,8 @@
 'use client';
 
+import { Field } from '@/components/form/field';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { WrapperCard } from '@/components/wrapper-card';
 import { addDiscord } from '@/lib/actions/add-discord';
@@ -46,27 +40,21 @@ export function Discord({ value }: { value: string | undefined }) {
           className="flex flex-col gap-3"
           onSubmit={form.handleSubmit(onSubmit)}
         >
-          <FormField
+          <Field
             control={form.control}
             name="webhook"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Webhook URL</FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <Input
-                      className="pl-8"
-                      placeholder="https://discord.com/api/webhooks/<id>"
-                      {...field}
-                    />
-                    <Link
-                      size={15}
-                      className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage />
-              </FormItem>
+            render={(field) => (
+              <div className="relative">
+                <Input
+                  className="pl-8"
+                  placeholder="https://discord.com/api/webhooks/<id>"
+                  {...field}
+                />
+                <Link
+                  size={15}
+                  className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                />
+              </div>
             )}
           />
 

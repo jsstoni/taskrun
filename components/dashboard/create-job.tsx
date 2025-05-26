@@ -1,5 +1,7 @@
 'use client';
 
+import { Field } from '@/components/form/field';
+import { FieldSelect } from '@/components/form/field-select';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -9,14 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormLabel } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { addJob } from '@/lib/actions/add-job';
@@ -26,13 +21,6 @@ import { Link, Plus } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../ui/select';
 
 export function CreateJob() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -73,11 +61,7 @@ export function CreateJob() {
   return (
     <Dialog open={isOpen} onOpenChange={closeDialog}>
       <DialogTrigger asChild>
-        <Button
-          className="mt-2 w-full justify-start"
-          size="sm"
-          variant="outline"
-        >
+        <Button className="justify-start" size="sm" variant="outline">
           <Plus /> Create Schedule
         </Button>
       </DialogTrigger>
@@ -93,46 +77,34 @@ export function CreateJob() {
             className="flex flex-col gap-3"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <FormField
+            <Field
               control={form.control}
               name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Schedule name</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+              label="Schedule name"
+              render={(field) => <Input {...field} />}
             />
 
             <div className="space-y-2">
               <FormLabel>Quick schedule</FormLabel>
               <div className="grid grid-cols-5 gap-2">
                 {fields.map((item, index) => (
-                  <FormField
+                  <Field
                     key={item.id}
                     control={form.control}
                     name={`quickSchedule.${index}`}
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormControl>
-                          <Input
-                            placeholder="*"
-                            {...field}
-                            onFocus={(e) => e.target.select()}
-                            onChange={(e) => {
-                              const value = e.target.value;
-                              const valid = /^[0-9+\-*/().\s]*$/;
-                              if (valid.test(value)) {
-                                field.onChange(value === '' ? '*' : value);
-                              }
-                            }}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
+                    render={(field) => (
+                      <Input
+                        placeholder="*"
+                        {...field}
+                        onFocus={(e) => e.target.select()}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const valid = /^[0-9+\-*/().\s]*$/;
+                          if (valid.test(value)) {
+                            field.onChange(value === '' ? '*' : value);
+                          }
+                        }}
+                      />
                     )}
                   />
                 ))}
@@ -140,64 +112,41 @@ export function CreateJob() {
             </div>
 
             <div className="flex items-start gap-2">
-              <FormField
+              <Field
                 control={form.control}
                 name="command"
-                render={({ field }) => (
-                  <FormItem className="flex-1">
-                    <FormLabel>Target URL</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input className="pl-8" {...field} />
-                        <Link
-                          size={15}
-                          className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
+                label="Target URL"
+                className="flex-1"
+                render={(field) => (
+                  <div className="relative">
+                    <Input className="pl-8" {...field} />
+                    <Link
+                      size={15}
+                      className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                    />
+                  </div>
                 )}
               />
 
-              <FormField
+              <FieldSelect
                 control={form.control}
                 name="method"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Method</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select method" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        <SelectItem value="POST">POST</SelectItem>
-                        <SelectItem value="PUT">PUT</SelectItem>
-                        <SelectItem value="DELETE">DELETE</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
+                label="Method"
+                placeholder="Select method"
+                items={[
+                  { name: 'POST', value: 'POST' },
+                  { name: 'PUT', value: 'PUT' },
+                  { name: 'DELETE', value: 'DELETE' },
+                ]}
               />
             </div>
 
-            <FormField
+            <Field
               control={form.control}
               name="metaData"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Payload</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder={'{\n  "title": ""\n}'} {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
+              label="Payload"
+              render={(field) => (
+                <Textarea placeholder={'{\n  "title": ""\n}'} {...field} />
               )}
             />
 
