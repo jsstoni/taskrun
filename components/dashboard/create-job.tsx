@@ -26,6 +26,13 @@ import { Link, Plus } from 'lucide-react';
 import { useAction } from 'next-safe-action/hooks';
 import { useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '../ui/select';
 
 export function CreateJob() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -132,25 +139,53 @@ export function CreateJob() {
               </div>
             </div>
 
-            <FormField
-              control={form.control}
-              name="command"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Target URL</FormLabel>
-                  <FormControl>
-                    <div className="relative">
-                      <Input className="pl-8" {...field} />
-                      <Link
-                        size={15}
-                        className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-                      />
-                    </div>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex items-start gap-2">
+              <FormField
+                control={form.control}
+                name="command"
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Target URL</FormLabel>
+                    <FormControl>
+                      <div className="relative">
+                        <Input className="pl-8" {...field} />
+                        <Link
+                          size={15}
+                          className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                        />
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="method"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Method</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select method" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="POST">POST</SelectItem>
+                        <SelectItem value="PUT">PUT</SelectItem>
+                        <SelectItem value="DELETE">DELETE</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               control={form.control}

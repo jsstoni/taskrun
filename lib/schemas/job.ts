@@ -11,6 +11,8 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
+export const jobMethodEnum = pgEnum('job_method', ['POST', 'PUT', 'DELETE']);
+
 export const jobs = pgTable(
   'jobs',
   {
@@ -18,6 +20,7 @@ export const jobs = pgTable(
     name: text('name').notNull(),
     scheduler: varchar('scheduler', { length: 150 }).notNull(),
     command: text('command').notNull(),
+    method: jobMethodEnum('method').notNull(),
     metadata: text('metadata').notNull(),
     active: boolean('active').notNull().default(true),
     userId: text('user_id')

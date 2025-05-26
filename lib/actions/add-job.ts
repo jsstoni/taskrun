@@ -16,6 +16,7 @@ export const addJob = actionClient
       name: data.name,
       scheduler: schedule,
       command: data.command,
+      method: data.method,
       metadata: data.metaData,
       userId: user,
     });

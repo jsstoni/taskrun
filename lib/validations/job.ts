@@ -16,6 +16,7 @@ export const schemaJobs = z.object({
     )
     .length(5, 'Must have 5 values'),
   command: z.string().url('Command must be a valid URL'),
+  method: z.enum(['POST', 'PUT', 'DELETE']),
   metaData: z.preprocess(
     (val) => {
       if (typeof val === 'string') {

@@ -62,9 +62,9 @@ export default async function JobId({
           </div>
           <div>
             <p className="block text-xl font-bold">
-              {job.name}{' '}
+              {job.name}
               <span className="ml-2 text-xs text-muted-foreground">
-                {job.command}
+                {job.method}: {job.command}
               </span>
             </p>
             <p className="text-sm text-muted-foreground">
