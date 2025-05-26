@@ -1,6 +1,14 @@
 import { Header } from '@/components/dashboard/header';
 import { RemoveJob } from '@/components/dashboard/remove-job';
 import { RunJob } from '@/components/dashboard/run-job';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
 import { db } from '@/lib/db';
 import { logs } from '@/lib/schemas/job';
 import { cn } from '@/lib/utils';
@@ -73,30 +81,44 @@ export default async function JobId({
           </div>
         </div>
 
-        <div className="mt-4 flex flex-col gap-4 border-t pt-4 text-sm text-muted-foreground">
-          {job.logs.map((log) => (
-            <div
-              className="flex flex-col items-start gap-2 border-b pb-2 md:flex-row"
-              key={log.id}
-            >
-              <p>{format(log.createdAt, 'dd/MM/yyyy HH:mm')}</p>
-              <p>{log.name}</p>
-              <p className="truncate md:w-[240px]">{log.response}</p>
-              <p
-                className={cn(
-                  'ml-auto rounded-lg p-1 px-3 text-xs text-foreground',
-                  {
-                    'bg-green-400/40': log.status === 'ok',
-                    'bg-red-400/40': log.status === 'failed',
-                  }
-                )}
-              >
-                {log.status}
-              </p>
-              <p>{log.timeResponse}ms</p>
-            </div>
-          ))}
-        </div>
+        <Table className="mt-4">
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[100px]">Time</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>Headers</TableHead>
+              <TableHead className="w-[120px] text-right">Status</TableHead>
+              <TableHead className="w-[80px] text-right">Time</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {job.logs.map((log) => (
+              <TableRow key={log.id}>
+                <TableCell className="font-medium">
+                  {format(log.createdAt, 'dd/MM/yyyy HH:mm')}
+                </TableCell>
+                <TableCell>{log.name}</TableCell>
+                <TableCell>{log.response}</TableCell>
+                <TableCell className="text-right">
+                  <p
+                    className={cn(
+                      'inline rounded-lg p-1 px-3 text-xs text-foreground',
+                      {
+                        'bg-green-400/40': log.status === 'ok',
+                        'bg-red-400/40': log.status === 'failed',
+                      }
+                    )}
+                  >
+                    {log.status}
+                  </p>
+                </TableCell>
+                <TableCell className="text-right">
+                  {log.timeResponse}ms
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </section>
     </>
   );
