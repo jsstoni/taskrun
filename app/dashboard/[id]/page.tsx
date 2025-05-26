@@ -4,6 +4,7 @@ import { RunJob } from '@/components/dashboard/run-job';
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -15,7 +16,7 @@ import { cn } from '@/lib/utils';
 import cronstrue from 'cronstrue';
 import { format } from 'date-fns';
 import { desc } from 'drizzle-orm';
-import { CalendarSync } from 'lucide-react';
+import { CalendarSync, Inbox } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
 async function jobById(id: string) {
@@ -98,7 +99,9 @@ export default async function JobId({
                   {format(log.createdAt, 'dd/MM/yyyy HH:mm')}
                 </TableCell>
                 <TableCell>{log.name}</TableCell>
-                <TableCell>{log.response}</TableCell>
+                <TableCell className="max-w-3xs truncate">
+                  {log.response}
+                </TableCell>
                 <TableCell className="text-right">
                   <p
                     className={cn(
@@ -118,6 +121,12 @@ export default async function JobId({
               </TableRow>
             ))}
           </TableBody>
+          {job.logs.length <= 0 && (
+            <TableCaption>
+              <Inbox size={64} strokeWidth={0.5} />
+              <p>Events list is currently empty</p>
+            </TableCaption>
+          )}
         </Table>
       </section>
     </>
