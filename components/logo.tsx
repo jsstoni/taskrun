@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 const variants = cva('inline-flex items-center gap-1', {
   variants: {
     size: {
-      default: 'text-3xl [&_svg]:size-9',
+      default: 'text-2xl [&_svg]:size-8',
       sm: 'text-lg [&_svg]:size-5',
     },
   },

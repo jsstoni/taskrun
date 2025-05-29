@@ -85,7 +85,7 @@ export default async function JobId({
         <Table className="mt-4">
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Time</TableHead>
+              <TableHead className="w-[100px]">Date</TableHead>
               <TableHead>Name</TableHead>
               <TableHead>Headers</TableHead>
               <TableHead className="w-[120px] text-right">Status</TableHead>
